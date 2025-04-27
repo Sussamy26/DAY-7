@@ -1,0 +1,23 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None:            # if root doesn't exist, i.e., no tree/node then return empty list []
+            return []
+        stack = [root]              # this pushes root into empty list named "stack"
+        result = []                 # creates empty list
+        while stack:                # until stack is not empty
+            node = stack.pop()      # we pop top element of stack
+            result.append(node.val) # and append it to result list
+            if node.left:           # if left of node exists then push to stack
+                stack.append(node.left)
+            if node.right:          # if left of node exists then push to stack
+                stack.append(node.right)
+
+        result.reverse()            # reverse() is made to reverse the list itself and return nothing(None)
+        # we can first reverse and then only return the result list... if we directly return result then it would return None by default
+        return result               # we can also return result[;:-1]. this list slicing technique return a new sliced reversed list
